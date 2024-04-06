@@ -1,16 +1,24 @@
+.ion-content {
+  --ion-background-color: #ffffff;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
 #container {
+  display: flex;
   text-align: center;
   justify-content: center;
   padding-top: 40px;
-  display: flex;
+  width: 250px;
 }
 
 #container p {
   font-size: 16px;
   line-height: 22px;
-
   color: #8c8c8c;
-
   margin: 0;
 }
 
