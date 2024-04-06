@@ -1,0 +1,6 @@
+<div *ngFor="let elemento of listado">
+  <app-dispositivo
+    [dispositivo]="elemento"
+    (onChange)="manejador($event)"
+  ></app-dispositivo>
+</div>
