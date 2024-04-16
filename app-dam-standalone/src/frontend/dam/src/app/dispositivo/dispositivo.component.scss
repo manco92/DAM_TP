@@ -9,6 +9,9 @@
 #dispositivo-container p {
   color: black;
 }
+#dispositivo-container:hover {
+  border: 1px dashed black;
+}
 
 #strong {
   font-weight: 700;

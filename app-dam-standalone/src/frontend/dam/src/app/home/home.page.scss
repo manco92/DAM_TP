@@ -2,17 +2,23 @@
   --ion-background-color: #ffffff;
   height: 100%;
   width: 100%;
-  display: flex;
-  text-align: center;
-  justify-content: center;
 }
 
-#container {
+#app-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+#center-container {
   display: flex;
   text-align: center;
   justify-content: center;
-  padding-top: 40px;
-  width: 250px;
+  flex-direction: column;
+  width: 400px;
 }
 
 #container p {

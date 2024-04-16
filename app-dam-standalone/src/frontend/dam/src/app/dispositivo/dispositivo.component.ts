@@ -1,22 +1,36 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
-import { ListadoDispositivoService } from '../services/listado-dispositivo.service';
-import { Dispositivo } from '../interfaces/dispositivo';
+import { SensorService } from '../services/detalles-sensor.service';
+import { SensorComponent } from '../sensor/sensor.component';
+import { MedicionService } from '../services/medicion.service';
 
 @Component({
   selector: 'app-dispositivo',
   templateUrl: './dispositivo.component.html',
   styleUrls: ['./dispositivo.component.scss'],
+  providers: [SensorComponent],
   standalone: true,
 })
 export class DispositivoComponent implements OnInit {
-  constructor() {}
+  constructor(
+    private medicionService: MedicionService,
+    private sensorComponent: SensorComponent
+  ) {}
 
   @Input() dispositivo: any;
-  @Output() onChange = new EventEmitter();
+  @Output() onClick = new EventEmitter();
 
-  cambiarNombre() {
-    this.dispositivo.name = 'Nuevo nombre';
-    this.onChange.emit(`El nuevo nombre es: ${this.dispositivo.name}`);
+  elegirSensor() {
+    this.medicionService
+      .getLastMedicionById(this.dispositivo.dispositivoId)
+      .subscribe(
+        (data: any) => {
+          this.sensorComponent.setNombreSensor(this.dispositivo.nombre);
+          this.sensorComponent.setValorObtenido(data.valor);
+        },
+        (error: any) => {
+          console.error('Error al obtener última medición:', error);
+        }
+      );
   }
 
   ngOnInit() {}

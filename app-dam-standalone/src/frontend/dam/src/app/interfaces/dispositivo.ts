@@ -1,5 +1,6 @@
 export interface Dispositivo {
-  id: number;
-  name: string;
-  location: string;
+  dispositivoId: number;
+  electrovalvulaId: number;
+  nombre: string;
+  ubicacion: string;
 }

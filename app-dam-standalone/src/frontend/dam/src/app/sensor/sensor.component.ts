@@ -11,19 +11,21 @@ require('highcharts/modules/solid-gauge')(Highcharts);
   standalone: true,
 })
 export class SensorComponent implements OnInit {
+  private nombreSensor: string = '';
   private valorObtenido: number = 0;
   public myChart: any;
   private chartOptions: any;
 
-  constructor() {
-    setTimeout(() => {
-      console.log('Cambio el valor del sensor');
-      this.valorObtenido = 60;
-      //llamo al update del chart para refrescar y mostrar el nuevo valor
+  public updateChart() {
+    console.log(this.nombreSensor, this.valorObtenido, this.myChart);
+    if (this.myChart) {
       this.myChart.update({
+        title: {
+          text: this.nombreSensor,
+        },
         series: [
           {
-            name: 'kPA',
+            name: [this.nombreSensor],
             data: [this.valorObtenido],
             tooltip: {
               valueSuffix: ' kPA',
@@ -31,7 +33,25 @@ export class SensorComponent implements OnInit {
           },
         ],
       });
-    }, 6000);
+    }
+  }
+
+  public setNombreSensor(nombre: string) {
+    this.nombreSensor = nombre;
+    this.updateChart();
+  }
+
+  public setValorObtenido(numero: number) {
+    this.valorObtenido = numero;
+    this.updateChart();
+  }
+
+  public getNombreSensor() {
+    return this.nombreSensor;
+  }
+
+  public getValorObtenido() {
+    return this.valorObtenido;
   }
 
   ngOnInit() {
@@ -52,7 +72,7 @@ export class SensorComponent implements OnInit {
         plotShadow: false,
       },
       title: {
-        text: 'Sensor N° 1',
+        text: this.nombreSensor,
       },
 
       credits: { enabled: false },
@@ -113,5 +133,6 @@ export class SensorComponent implements OnInit {
       ],
     };
     this.myChart = Highcharts.chart('highcharts', this.chartOptions);
+    console.log(this.myChart);
   }
 }

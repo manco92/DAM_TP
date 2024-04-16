@@ -1,6 +1,8 @@
-<div *ngFor="let elemento of listado">
-  <app-dispositivo
-    [dispositivo]="elemento"
-    (onChange)="manejador($event)"
-  ></app-dispositivo>
+<div *ngIf="listado | async as listado">
+  <div *ngFor="let elemento of listado">
+    <app-dispositivo
+      [dispositivo]="elemento"
+      (onChange)="manejador($event)"
+    ></app-dispositivo>
+  </div>
 </div>
