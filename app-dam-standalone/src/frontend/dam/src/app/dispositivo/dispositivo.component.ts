@@ -1,13 +1,12 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
-import { SensorService } from '../services/detalles-sensor.service';
 import { SensorComponent } from '../sensor/sensor.component';
 import { MedicionService } from '../services/medicion.service';
+import { PopUpComponent } from '../popUp/popUp.component';
 
 @Component({
   selector: 'app-dispositivo',
   templateUrl: './dispositivo.component.html',
   styleUrls: ['./dispositivo.component.scss'],
-  providers: [SensorComponent],
   standalone: true,
 })
 export class DispositivoComponent implements OnInit {
@@ -24,8 +23,10 @@ export class DispositivoComponent implements OnInit {
       .getLastMedicionById(this.dispositivo.dispositivoId)
       .subscribe(
         (data: any) => {
-          this.sensorComponent.setNombreSensor(this.dispositivo.nombre);
-          this.sensorComponent.setValorObtenido(data.valor);
+          this.sensorComponent.setValoresSensor({
+            nombreSensor: this.dispositivo.nombre,
+            valorObtenido: Number(data.valor),
+          });
         },
         (error: any) => {
           console.error('Error al obtener última medición:', error);

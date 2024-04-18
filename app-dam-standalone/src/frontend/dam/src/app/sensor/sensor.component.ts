@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import * as Highcharts from 'highcharts';
+import { ValoresSensor } from '../interfaces/valoresSensor';
+import { PopUpComponent } from '../popUp/popUp.component';
 declare var require: any;
 require('highcharts/highcharts-more')(Highcharts);
 require('highcharts/modules/solid-gauge')(Highcharts);
@@ -11,58 +13,38 @@ require('highcharts/modules/solid-gauge')(Highcharts);
   standalone: true,
 })
 export class SensorComponent implements OnInit {
-  private nombreSensor: string = '';
-  private valorObtenido: number = 0;
+  public valoresSensor: ValoresSensor;
   public myChart: any;
-  private chartOptions: any;
+  public chartOptions: any;
 
-  public updateChart() {
-    console.log(this.nombreSensor, this.valorObtenido, this.myChart);
-    if (this.myChart) {
-      this.myChart.update({
-        title: {
-          text: this.nombreSensor,
-        },
-        series: [
-          {
-            name: [this.nombreSensor],
-            data: [this.valorObtenido],
-            tooltip: {
-              valueSuffix: ' kPA',
-            },
-          },
-        ],
-      });
-    }
+  constructor(private popUpComponent: PopUpComponent) {
+    this.valoresSensor = { valorObtenido: 0, nombreSensor: 'Elegir Sensor' };
   }
 
-  public setNombreSensor(nombre: string) {
-    this.nombreSensor = nombre;
-    this.updateChart();
+  @Output() onClick = new EventEmitter();
+
+  onVerTodasLasMedicionesClick() {
+    this.popUpComponent.setIsOpen(true);
   }
 
-  public setValorObtenido(numero: number) {
-    this.valorObtenido = numero;
-    this.updateChart();
+  onVerLogRiegosClick() {
+    this.popUpComponent.setIsOpen(true);
   }
 
-  public getNombreSensor() {
-    return this.nombreSensor;
+  setValoresSensor(valoresSensor: ValoresSensor) {
+    this.valoresSensor = valoresSensor;
+    this.generarChart(valoresSensor);
   }
 
-  public getValorObtenido() {
-    return this.valorObtenido;
+  getValoresSensor() {
+    return this.valoresSensor;
   }
 
   ngOnInit() {
-    this.generarChart();
+    this.generarChart(this.valoresSensor);
   }
 
-  //  ionViewDidEnter() {
-  //    this.generarChart();
-  //  }
-
-  generarChart() {
+  generarChart(valoresSensor: ValoresSensor) {
     this.chartOptions = {
       chart: {
         type: 'gauge',
@@ -72,7 +54,7 @@ export class SensorComponent implements OnInit {
         plotShadow: false,
       },
       title: {
-        text: this.nombreSensor,
+        text: valoresSensor.nombreSensor,
       },
 
       credits: { enabled: false },
@@ -124,8 +106,8 @@ export class SensorComponent implements OnInit {
       },
       series: [
         {
-          name: 'kPA',
-          data: [this.valorObtenido],
+          name: [this.valoresSensor.nombreSensor],
+          data: [this.valoresSensor.valorObtenido],
           tooltip: {
             valueSuffix: ' kPA',
           },
@@ -133,6 +115,5 @@ export class SensorComponent implements OnInit {
       ],
     };
     this.myChart = Highcharts.chart('highcharts', this.chartOptions);
-    console.log(this.myChart);
   }
 }

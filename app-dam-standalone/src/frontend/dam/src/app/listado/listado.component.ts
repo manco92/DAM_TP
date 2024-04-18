@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListadoDispositivoService } from '../services/listado-dispositivo.service';
 import { Dispositivo } from '../interfaces/dispositivo';
@@ -7,16 +7,13 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-listado',
-  templateUrl: './listado.component.html',
-  styleUrls: ['./listado.component.scss'],
+  templateUrl: 'listado.component.html',
+  styleUrls: ['listado.component.scss'],
   imports: [CommonModule, DispositivoComponent],
   standalone: true,
 })
-export class ListadoComponent implements OnInit {
-  constructor(
-    private listadoDispositivoService: ListadoDispositivoService,
-    private listadoDispositivo: ListadoDispositivoService
-  ) {}
+export class ListadoComponent {
+  constructor(private listadoDispositivoService: ListadoDispositivoService) {}
 
   public listado: Observable<Dispositivo[]> =
     this.listadoDispositivoService.getAllSensors();
@@ -27,20 +24,5 @@ export class ListadoComponent implements OnInit {
 
   getNombreSensor() {
     return this.listado;
-  }
-
-  manejador(event: any) {
-    console.log(event);
-  }
-
-  ngOnInit() {
-    this.listadoDispositivo.getAllSensors().subscribe(
-      (data) => {
-        console.log(data);
-      },
-      (error) => {
-        console.error('Error al obtener listado de sensores');
-      }
-    );
   }
 }

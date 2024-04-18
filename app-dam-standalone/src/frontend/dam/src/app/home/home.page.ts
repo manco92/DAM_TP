@@ -7,6 +7,8 @@ import {
 } from '@ionic/angular/standalone';
 import { ListadoComponent } from '../listado/listado.component';
 import { SensorComponent } from '../sensor/sensor.component';
+import { PopUpComponent } from '../popUp/popUp.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -14,13 +16,16 @@ import { SensorComponent } from '../sensor/sensor.component';
   styleUrls: ['home.page.scss'],
   standalone: true,
   imports: [
+    CommonModule,
     SensorComponent,
     ListadoComponent,
+    PopUpComponent,
     IonHeader,
     IonToolbar,
     IonTitle,
     IonContent,
   ],
+  providers: [PopUpComponent, SensorComponent],
 })
 export class HomePage {
   constructor() {}

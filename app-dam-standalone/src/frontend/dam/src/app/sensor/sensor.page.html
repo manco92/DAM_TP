@@ -2,7 +2,11 @@
   <div id="highcharts"></div>
   <div id="buttons-container">
     <button class="button">Abrir electroválvula</button>
-    <button class="button">Ver todas las mediciones</button>
-    <button class="button">Ver log riegos</button>
+    <button class="button" (click)="onVerTodasLasMedicionesClick()">
+      Ver todas las mediciones
+    </button>
+    <button class="button" (click)="onVerLogRiegosClick()">
+      Ver log riegos
+    </button>
   </div>
 </div>

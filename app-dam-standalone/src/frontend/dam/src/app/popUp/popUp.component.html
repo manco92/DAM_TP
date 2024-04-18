@@ -1,0 +1,10 @@
+<div id="popUp-container" *ngIf="isOpen && popUpData && popUpData.length">
+  <div id="popUp-close-btn" (click)="onClose()">x</div>
+  <div id="popUp-body">
+    <div id="popUp-list">
+      <div *ngFor="let elemento of popUpData">
+        <p>ABABA</p>
+      </div>
+    </div>
+  </div>
+</div>
