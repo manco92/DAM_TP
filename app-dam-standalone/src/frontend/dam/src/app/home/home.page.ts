@@ -25,7 +25,7 @@ import { CommonModule } from '@angular/common';
     IonTitle,
     IonContent,
   ],
-  providers: [PopUpComponent, SensorComponent],
+  providers: [SensorComponent],
 })
 export class HomePage {
   constructor() {}

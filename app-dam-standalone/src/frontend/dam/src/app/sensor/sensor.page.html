@@ -1,11 +1,34 @@
 <div>
   <div id="highcharts"></div>
   <div id="buttons-container">
-    <button class="button">Abrir electroválvula</button>
-    <button class="button" (click)="onVerTodasLasMedicionesClick()">
+    <div>
+      <button
+        class="button open"
+        (click)="this.sensorService.onAbrirCerrarValvula()"
+        [disabled]="!sensorService.valoresSensor.idSensor || sensorService.valoresSensor.apertura === 1"
+      >
+        Abrir electroválvula
+      </button>
+      <button
+        class="button close"
+        (click)="this.sensorService.onAbrirCerrarValvula()"
+        [disabled]="!sensorService.valoresSensor.idSensor  || sensorService.valoresSensor.apertura === 0"
+      >
+        Cerrar electroválvula
+      </button>
+    </div>
+    <button
+      class="button"
+      (click)="this.sensorService.onVerTodasLasMedicionesClick()"
+      [disabled]="!sensorService.valoresSensor.idSensor"
+    >
       Ver todas las mediciones
     </button>
-    <button class="button" (click)="onVerLogRiegosClick()">
+    <button
+      class="button"
+      (click)="this.sensorService.onVerLogRiegosClick()"
+      [disabled]="!sensorService.valoresSensor.idSensor"
+    >
       Ver log riegos
     </button>
   </div>

@@ -1,7 +1,6 @@
-import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
-import { SensorComponent } from '../sensor/sensor.component';
+import { Component, OnInit, Input } from '@angular/core';
 import { MedicionService } from '../services/medicion.service';
-import { PopUpComponent } from '../popUp/popUp.component';
+import { SensorService } from '../services/detalles-sensor.service';
 
 @Component({
   selector: 'app-dispositivo',
@@ -12,20 +11,21 @@ import { PopUpComponent } from '../popUp/popUp.component';
 export class DispositivoComponent implements OnInit {
   constructor(
     private medicionService: MedicionService,
-    private sensorComponent: SensorComponent
+    private sensorService: SensorService
   ) {}
 
   @Input() dispositivo: any;
-  @Output() onClick = new EventEmitter();
 
   elegirSensor() {
     this.medicionService
       .getLastMedicionById(this.dispositivo.dispositivoId)
       .subscribe(
         (data: any) => {
-          this.sensorComponent.setValoresSensor({
+          this.sensorService.setValoresSensor({
             nombreSensor: this.dispositivo.nombre,
             valorObtenido: Number(data.valor),
+            idSensor: this.dispositivo.dispositivoId,
+            apertura: data.apertura,
           });
         },
         (error: any) => {

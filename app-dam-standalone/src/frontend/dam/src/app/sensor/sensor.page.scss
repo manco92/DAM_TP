@@ -15,5 +15,15 @@
   width: 100px;
   height: 30px;
   align-self: center;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.open {
+  background-color: rgb(8, 128, 88);
+}
+
+.close {
+  background-color: rgb(170, 45, 78);
 }
