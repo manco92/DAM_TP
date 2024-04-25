@@ -11,10 +11,12 @@
     <div id="popUp-list">
       <div *ngFor="let elemento of popUpService.popUpData">
         <p>
-          Medicion ID:
+          ID:
           {{
             popUpService.popUpData[popUpService.popUpData.indexOf(elemento)]
-              .medicionId
+              .medicionId ||
+              popUpService.popUpData[popUpService.popUpData.indexOf(elemento)]
+                .logRiegoId
           }}
           - Fecha:
           {{
