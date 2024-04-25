@@ -9,9 +9,9 @@ En este trabajo práctico, se creó con ionic angular una aplicación que permit
 
 Las interacciones involucran poder ver la última medicición registrada de casa sensor al hacer clic en cada uno de ellos. Asimismo, se permite consultar todas las mediciones de dicho dispositivo. Por otra parte, se puede abrir y cerrar la electroválvula y ver los registros de cada apertura y cierre. En caso de que se acumulen varios registros, se le agregó una barra de scroll.
 
-![Captura de app]("\app-dam-standalone\captura1.png")
+![Captura de app]("app-dam-standalone/captura1.png)
 
-![Captura de logs de riego]("\app-dam-standalone\captura2.png")
+![Captura de logs de riego](app-dam-standalone/captura2.png)
 
 # CÓMO CORRER LA APP
 
